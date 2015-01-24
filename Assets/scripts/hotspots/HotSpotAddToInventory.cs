@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-public class HotSpotSimple : HotSpot {
+public class HotSpotAddToInventory : HotSpot {
+
+  public GameObject item;
 
   public override void OnPerformAction() {
-    Debug.Log("Performing action");
+    GameController.Instance.Inventory.Add(item);
   }
 }
+

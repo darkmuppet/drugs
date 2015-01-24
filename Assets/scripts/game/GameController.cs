@@ -21,6 +21,8 @@ public class GameController : MonoBehaviour {
 
   public PlayerController Player { get; private set; }
 
+  public Inventory Inventory { get; private set; }
+
   public void Awake() {
     instance = this;
     DontDestroyOnLoad(gameObject);
@@ -31,6 +33,8 @@ public class GameController : MonoBehaviour {
     states.Add(new GameStatePlaying("GameStatePlaying"));
 
     StateMachine = StateMachine.Create("state_machine", states, "GameStateMenu");
+
+    Inventory = new Inventory();
   }
 
   public void SwitchToRoom(string sceneName) {

@@ -1,39 +1,61 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public abstract class HotSpot : MonoBehaviour
-{
+public abstract class HotSpot : MonoBehaviour {
 
-    public Transform playerTarget;
+  public Transform playerTarget;
 
-    void OnMouseOver()
-    {
-        HighlightHotSpot();
+  public List<string> neededInventoryItems;
+
+  public bool deactivateAfterAction = true;
+
+  public void OnMouseOver() {
+    HighlightHotSpot();
+  }
+
+  public void OnMouseUpAsButton() {
+    OnHotSpotClicked();
+  }
+
+  public void Update() {
+    // TODO change highlight button
+    if (Input.GetMouseButtonDown(1)) {
+      HighlightHotSpot();
     }
+  }
 
-    void OnMouseUpAsButton()
-    {
-        OnHotSpotClicked();
-    }
+  private void HighlightHotSpot() {
+    // TODO glow or something
+  }
 
-    void Update()
-    {
-        // TODO change highlight button
-        if (Input.GetMouseButtonDown(1))
-        {
-            HighlightHotSpot();
+  private void OnHotSpotClicked() {
+    GameController.Instance.Player.MoveToHotSpot(this);
+  }
+
+  public void OnPlayerArrived() {
+    if (neededInventoryItems == null || neededInventoryItems.Count == 0) {
+      PerformAction();
+    } else {
+      bool meetsRequirements = true;
+      neededInventoryItems.ForEach(item => {
+        if (GameController.Instance.Inventory.Owns(item) == false) {
+          meetsRequirements = false;
         }
+      });
+      if (meetsRequirements) {
+        PerformAction();
+      }
     }
+  }
 
-    void HighlightHotSpot()
-    {
-        // TODO glow or something
+  private void PerformAction() {
+    OnPerformAction();
+
+    if (deactivateAfterAction) {
+      GameObject.Destroy(gameObject);
     }
+  }
 
-    void OnHotSpotClicked()
-    {
-        GameController.Instance.Player.MoveToHotSpot(this);
-    }
-
-    public abstract void OnPlayerArrived();
+  public abstract void OnPerformAction();
 }

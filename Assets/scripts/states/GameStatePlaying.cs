@@ -20,6 +20,10 @@ public class GameStatePlaying : AbstractState {
   protected override void OnEnter(object onEnterParams = null) {
     RoomRoot = onEnterParams as RoomRoot;
 
+    if (RoomRoot.clearInventory) {
+      GameController.Instance.Inventory.Clear();
+    }
+
     GameController.Instance.SpawnPlayer(RoomRoot.playerStart);
   }
 

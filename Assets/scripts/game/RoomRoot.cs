@@ -13,6 +13,8 @@ public class RoomRoot : MonoBehaviour {
 
   public Transform playerStart;
 
+  public bool clearInventory = true;
+
   private static bool firstLoad = true;
 
   public iTweenPath playerPath;
