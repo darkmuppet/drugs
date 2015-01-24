@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour {
 
   public float speed = 10;
 
+  public float depthScaleFactor = -1.2f;
+
   private HotSpot CurrentHotSpot { get; set; }
 
   public void MoveToHotSpot(HotSpot hotSpot, iTween.EaseType easeType = iTween.EaseType.linear) {
@@ -43,5 +45,16 @@ public class PlayerController : MonoBehaviour {
     if (CurrentHotSpot != null) {
       CurrentHotSpot.OnPlayerArrived();
     }
+  }
+
+  //public void Update() {
+  //  Debug.Log(transform.position.z.ToString());
+  //}
+
+  public void LateUpdate() {
+    Vector3 scale = transform.localScale;
+    scale.x = 1.0f - transform.position.z * depthScaleFactor;
+    scale.y = 1.0f - transform.position.z * depthScaleFactor;
+    transform.localScale = scale;
   }
 }
