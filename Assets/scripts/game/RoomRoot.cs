@@ -25,6 +25,13 @@ public class RoomRoot : MonoBehaviour {
     }
   }
 
+  public WaypointPathfinder pathFinder;
+  public WaypointPathfinder PathFinder {
+    get {
+      return pathFinder;
+    }
+  }
+
   public void Start() {
 
 #if UNITY_EDITOR
@@ -34,6 +41,5 @@ public class RoomRoot : MonoBehaviour {
       roomLoadingHelper.LoadRoomForDevelopment(Application.loadedLevelName);
     }
 #endif
-
   }
 }

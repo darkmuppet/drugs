@@ -23,6 +23,8 @@ public class GameController : MonoBehaviour {
 
   public Inventory Inventory { get; private set; }
 
+  public RoomRoot RoomRoot { get; private set; }
+
   public void Awake() {
     instance = this;
     DontDestroyOnLoad(gameObject);
@@ -53,13 +55,17 @@ public class GameController : MonoBehaviour {
     ChangeState("GameStateLoading", startingRoom);
   }
 
-  public void SpawnPlayer(Transform transform) {
+  public void InitializePlayer(RoomRoot roomRoot) {
     if (Player != null) {
       GameObject.Destroy(Player.gameObject);
     }
 
-    GameObject goPlayer = GameObject.Instantiate(prefabPlayer, transform.position, transform.rotation) as GameObject;
+    RoomRoot = roomRoot;
+
+    GameObject goPlayer = GameObject.Instantiate(prefabPlayer, RoomRoot.playerStart.position, RoomRoot.playerStart.rotation) as GameObject;
     Player = goPlayer.GetComponent<PlayerController>();
   }
+
+  
 }
 
