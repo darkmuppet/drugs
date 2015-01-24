@@ -10,18 +10,26 @@ public abstract class HotSpot : MonoBehaviour {
 
   public bool deactivateAfterAction = true;
 
+  private bool InputLocked { get; set; }
+
   public void OnMouseOver() {
-    HighlightHotSpot();
+    if (InputLocked == false) {
+      HighlightHotSpot();
+    }
   }
 
   public void OnMouseUpAsButton() {
-    OnHotSpotClicked();
+    if (InputLocked == false) {
+      OnHotSpotClicked();
+    }
   }
 
   public void Update() {
     // TODO change highlight button
-    if (Input.GetMouseButtonDown(1)) {
-      HighlightHotSpot();
+    if (InputLocked == false) {
+      if (Input.GetMouseButtonDown(1)) {
+        HighlightHotSpot();
+      }
     }
   }
 
@@ -33,7 +41,7 @@ public abstract class HotSpot : MonoBehaviour {
     GameController.Instance.Player.MoveToHotSpot(this);
   }
 
-  public void OnPlayerArrived() {
+  public void OnPlayerArrived() {  
     if (neededInventoryItems == null || neededInventoryItems.Count == 0) {
       PerformAction();
     } else {
@@ -50,12 +58,21 @@ public abstract class HotSpot : MonoBehaviour {
   }
 
   private void PerformAction() {
-    OnPerformAction();
+    StartCoroutine(PerformActionCoroutine());
+  }
+
+  private IEnumerator PerformActionCoroutine() {
+    Debug.Log("Performing action");
+    InputLocked = true;
+
+    yield return StartCoroutine(OnPerformAction());
 
     if (deactivateAfterAction) {
       GameObject.Destroy(gameObject);
     }
+    InputLocked = false;
+    Debug.Log("Action done");
   }
 
-  public abstract void OnPerformAction();
+  public abstract IEnumerator OnPerformAction();
 }

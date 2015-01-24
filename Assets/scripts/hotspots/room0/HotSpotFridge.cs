@@ -12,8 +12,9 @@ public class HotSpotFridge : HotSpot
 
 
 
-    public override void OnPerformAction()
+    public override IEnumerator OnPerformAction()
     {
+      
         if (!nextItem)
         {
             Debug.Log("first item");
@@ -26,5 +27,6 @@ public class HotSpotFridge : HotSpot
             GameController.Instance.Inventory.Add(item2);
             deactivateAfterAction = true;
         }
+        yield return null;
     }
 }

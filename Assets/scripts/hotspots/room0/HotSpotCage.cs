@@ -6,9 +6,10 @@ public class HotSpotCage : HotSpot
 
     public GameObject catHotSpot;
 
-    public override void OnPerformAction()
+    public override IEnumerator OnPerformAction()
     {
-        // TODO play bird/cage animation, move cat
         catHotSpot.SetActive(true);
+        yield return null;
+        // TODO play bird/cage animation, move cat
     }
 }

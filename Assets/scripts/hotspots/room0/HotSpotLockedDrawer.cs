@@ -11,7 +11,7 @@ public class HotSpotLockedDrawer : HotSpot
 
 
 
-    public override void OnPerformAction()
+    public override IEnumerator OnPerformAction()
     {
         if (!nextItem)
         {
@@ -25,5 +25,6 @@ public class HotSpotLockedDrawer : HotSpot
             GameController.Instance.Inventory.Add(item2);
             deactivateAfterAction = true;
         }
+        yield return null;
     }
 }
