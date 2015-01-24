@@ -13,6 +13,11 @@ public class PlayerController : MonoBehaviour {
   private HotSpot CurrentHotSpot { get; set; }
 
   public void MoveToHotSpot(HotSpot hotSpot, iTween.EaseType easeType = iTween.EaseType.linear) {
+    if (CurrentHotSpot == hotSpot) {
+      // already on the way
+      return;
+    }
+
     CurrentHotSpot = hotSpot;
 
     WaypointPathfinder pathFinder = GameController.Instance.RoomRoot.PathFinder;
