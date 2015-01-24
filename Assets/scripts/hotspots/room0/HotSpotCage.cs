@@ -4,8 +4,8 @@ using System.Collections;
 public class HotSpotCage : HotSpot {
 
 
-    public override void OnPerformAction()
-    {
-        // TODO play bird/cage animation, move cat
-    }
+  public override IEnumerator OnPerformAction() {
+    yield return null;
+    // TODO play bird/cage animation, move cat
+  }
 }

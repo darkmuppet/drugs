@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour {
 
   public float depthScaleFactor = -1.2f;
 
+  public Animator animator;
+
   private HotSpot CurrentHotSpot { get; set; }
 
   public void MoveToHotSpot(HotSpot hotSpot, iTween.EaseType easeType = iTween.EaseType.linear) {
@@ -42,10 +44,12 @@ public class PlayerController : MonoBehaviour {
       ));
 
     // TODO: trigger walk animation
+    //animator.SetTrigger("walk");
   }
 
   private void OnPathComplete() {
     // TODO: trigger idle animation
+    //animator.SetTrigger("idle");
 
     if (CurrentHotSpot != null) {
       CurrentHotSpot.OnPlayerArrived();
@@ -61,5 +65,9 @@ public class PlayerController : MonoBehaviour {
     scale.x = 1.0f - transform.position.z * depthScaleFactor;
     scale.y = 1.0f - transform.position.z * depthScaleFactor;
     transform.localScale = scale;
+  }
+
+  public void TriggerAnimation(string name) {
+    animator.SetTrigger(name);
   }
 }
