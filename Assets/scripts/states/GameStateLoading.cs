@@ -37,7 +37,9 @@ public class GameStateLoading : AbstractState {
       GameObject.Destroy(goRoomRoot);
     }
 
-    yield return Application.LoadLevelAdditiveAsync(sceneName);
+    //yield return Application.LoadLevelAdditiveAsync(sceneName);
+    yield return null;
+    Application.LoadLevel(sceneName);
 
     // TODO: fade in
 
