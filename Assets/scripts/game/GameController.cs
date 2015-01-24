@@ -17,6 +17,10 @@ public class GameController : MonoBehaviour {
 
   private StateMachine StateMachine { get; set; }
 
+  public GameObject prefabPlayer;
+
+  public PlayerController Player { get; private set; }
+
   public void Awake() {
     instance = this;
     DontDestroyOnLoad(gameObject);
@@ -43,6 +47,15 @@ public class GameController : MonoBehaviour {
 
   public void LoadStartingRoom() {
     ChangeState("GameStateLoading", startingRoom);
+  }
+
+  public void SpawnPlayer(Transform transform) {
+    if (Player != null) {
+      GameObject.Destroy(Player.gameObject);
+    }
+
+    GameObject goPlayer = GameObject.Instantiate(prefabPlayer, transform.position, transform.rotation) as GameObject;
+    Player = goPlayer.GetComponent<PlayerController>();
   }
 }
 

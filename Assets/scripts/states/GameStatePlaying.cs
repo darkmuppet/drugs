@@ -20,7 +20,7 @@ public class GameStatePlaying : AbstractState {
   protected override void OnEnter(object onEnterParams = null) {
     RoomRoot = onEnterParams as RoomRoot;
 
-    // TODO: set player to starting point
+    GameController.Instance.SpawnPlayer(RoomRoot.playerStart);
   }
 
   protected override void OnLeave() {
@@ -28,6 +28,6 @@ public class GameStatePlaying : AbstractState {
   }
 
   protected override void OnUpdate() {
-    
+
   }
 }

@@ -35,6 +35,5 @@ public abstract class HotSpot : MonoBehaviour
         GameController.Instance.Player.MoveToHotSpot(this);
     }
 
-    public abstract void HotSpotReached();
-
+    public abstract void OnPlayerArrived();
 }

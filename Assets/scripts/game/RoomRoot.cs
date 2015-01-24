@@ -15,6 +15,14 @@ public class RoomRoot : MonoBehaviour {
 
   private static bool firstLoad = true;
 
+  public iTweenPath playerPath;
+
+  public iTweenPath PlayerPath {
+    get {
+      return playerPath;
+    }
+  }
+
   public void Start() {
 
 #if UNITY_EDITOR
