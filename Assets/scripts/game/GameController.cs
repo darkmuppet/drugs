@@ -17,6 +17,14 @@ public class GameController : MonoBehaviour {
 
   private StateMachine StateMachine { get; set; }
 
+  public GameObject prefabPlayer;
+
+  public PlayerController Player { get; private set; }
+
+  public Inventory Inventory { get; private set; }
+
+  public RoomRoot RoomRoot { get; private set; }
+
   public void Awake() {
     instance = this;
     DontDestroyOnLoad(gameObject);
@@ -27,6 +35,8 @@ public class GameController : MonoBehaviour {
     states.Add(new GameStatePlaying("GameStatePlaying"));
 
     StateMachine = StateMachine.Create("state_machine", states, "GameStateMenu");
+
+    Inventory = new Inventory();
   }
 
   public void SwitchToRoom(string sceneName) {
@@ -44,5 +54,18 @@ public class GameController : MonoBehaviour {
   public void LoadStartingRoom() {
     ChangeState("GameStateLoading", startingRoom);
   }
+
+  public void InitializePlayer(RoomRoot roomRoot) {
+    if (Player != null) {
+      GameObject.Destroy(Player.gameObject);
+    }
+
+    RoomRoot = roomRoot;
+
+    GameObject goPlayer = GameObject.Instantiate(prefabPlayer, RoomRoot.playerStart.position, RoomRoot.playerStart.rotation) as GameObject;
+    Player = goPlayer.GetComponent<PlayerController>();
+  }
+
+  
 }
 

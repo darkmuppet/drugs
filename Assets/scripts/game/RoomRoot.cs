@@ -13,7 +13,16 @@ public class RoomRoot : MonoBehaviour {
 
   public Transform playerStart;
 
+  public bool clearInventory = true;
+
   private static bool firstLoad = true;
+
+  public WaypointPathfinder pathFinder;
+  public WaypointPathfinder PathFinder {
+    get {
+      return pathFinder;
+    }
+  }
 
   public void Start() {
 
@@ -24,6 +33,5 @@ public class RoomRoot : MonoBehaviour {
       roomLoadingHelper.LoadRoomForDevelopment(Application.loadedLevelName);
     }
 #endif
-
   }
 }

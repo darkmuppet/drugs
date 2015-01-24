@@ -35,6 +35,7 @@ public class GameStateLoading : AbstractState {
     GameObject goRoomRoot = GameObject.Find(RoomRoot.roomRootName);
     if (goRoomRoot != null) {
       GameObject.Destroy(goRoomRoot);
+      goRoomRoot = null;
     }
 
     //yield return Application.LoadLevelAdditiveAsync(sceneName);
@@ -44,9 +45,13 @@ public class GameStateLoading : AbstractState {
     // TODO: fade in
 
     // find new room root
-    goRoomRoot = GameObject.Find(RoomRoot.roomRootName);
+    while (goRoomRoot == null) {
+      yield return null;
+      goRoomRoot = GameObject.Find(RoomRoot.roomRootName);
+    }
 
-    GameController.Instance.ChangeState("GameStatePlaying", goRoomRoot);
+    RoomRoot roomRoot = goRoomRoot.GetComponent<RoomRoot>();
+    GameController.Instance.ChangeState("GameStatePlaying", roomRoot);
   }
 
 }
