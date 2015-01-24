@@ -3,9 +3,6 @@ using System.Collections;
 
 public class GameStateMenu : AbstractState {
 
-  // TODO: make configurable
-  private const string startingRoom = "room_0";
-
   private GameObject GoMenuCamera { get; set; }
 
   public GameStateMenu(string stateName) : base(stateName) {
@@ -26,7 +23,7 @@ public class GameStateMenu : AbstractState {
 
   protected override void OnUpdate() {
     if (Input.GetMouseButton(0)) {
-      GameController.Instance.ChangeState("GameStateLoading", startingRoom);
+      GameController.Instance.LoadStartingRoom();
     }
   }
 }

@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour {
 
+  public static string startingRoom = "room_0";
+
   private static GameController instance;
   public static GameController Instance {
     get {
@@ -17,6 +19,7 @@ public class GameController : MonoBehaviour {
 
   public void Awake() {
     instance = this;
+    DontDestroyOnLoad(gameObject);
 
     List<AbstractState> states = new List<AbstractState>();
     states.Add(new GameStateLoading("GameStateLoading"));
@@ -27,8 +30,7 @@ public class GameController : MonoBehaviour {
   }
 
   public void SwitchToRoom(string sceneName) {
-    // TODO: switch to loading game state (fade out/in etc.)
-    Application.LoadLevel(sceneName);
+    ChangeState("GameStateLoading", sceneName);
   }
 
   public void ChangeState(string stateName, object onEnterParams = null) {
@@ -37,6 +39,10 @@ public class GameController : MonoBehaviour {
 
   public void OnGUI() {
     GUILayout.Label("Current state: " + StateMachine.CurrentStateName);
+  }
+
+  public void LoadStartingRoom() {
+    ChangeState("GameStateLoading", startingRoom);
   }
 }
 
