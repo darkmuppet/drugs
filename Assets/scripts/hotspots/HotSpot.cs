@@ -4,6 +4,8 @@ using System.Collections;
 public abstract class HotSpot : MonoBehaviour
 {
 
+    public Transform playerTarget;
+
     void OnMouseOver()
     {
         HighlightHotSpot();
@@ -28,6 +30,11 @@ public abstract class HotSpot : MonoBehaviour
         // TODO glow or something
     }
 
-    protected abstract void OnHotSpotClicked();
+    void OnHotSpotClicked()
+    {
+        GameController.Instance.Player.MoveToHotSpot(this);
+    }
+
+    public abstract void HotSpotReached();
 
 }
