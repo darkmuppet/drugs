@@ -15,10 +15,11 @@ public class PlayerController : MonoBehaviour {
   private HotSpot CurrentHotSpot { get; set; }
 
   public void MoveToHotSpot(HotSpot hotSpot, iTween.EaseType easeType = iTween.EaseType.linear) {
-    if (CurrentHotSpot == hotSpot) {
+      // TODO fix this
+    //if (CurrentHotSpot == hotSpot) {
       // already on the way
-      return;
-    }
+      //return;
+    //}
 
     CurrentHotSpot = hotSpot;
 

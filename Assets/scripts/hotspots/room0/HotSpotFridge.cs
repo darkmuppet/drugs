@@ -14,7 +14,7 @@ public class HotSpotFridge : HotSpot
 
     public override IEnumerator OnPerformAction()
     {
-      
+        Debug.Log("nextItem: " + nextItem);
         if (!nextItem)
         {
             Debug.Log("first item");

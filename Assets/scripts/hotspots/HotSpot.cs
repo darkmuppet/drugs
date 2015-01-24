@@ -51,9 +51,14 @@ public abstract class HotSpot : MonoBehaviour {
           meetsRequirements = false;
         }
       });
-      if (meetsRequirements) {
-        PerformAction();
-      }
+        if (meetsRequirements)
+        {
+            PerformAction();
+        }
+        else
+        {
+            // TODO sigh!
+        }
     }
   }
 
