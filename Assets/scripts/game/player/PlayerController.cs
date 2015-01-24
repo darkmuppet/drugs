@@ -44,12 +44,12 @@ public class PlayerController : MonoBehaviour {
       ));
 
     // TODO: trigger walk animation
-    //animator.SetTrigger("walk");
+    animator.SetTrigger("walk");
   }
 
   private void OnPathComplete() {
     // TODO: trigger idle animation
-    //animator.SetTrigger("idle");
+    animator.SetTrigger("idle");
 
     if (CurrentHotSpot != null) {
       CurrentHotSpot.OnPlayerArrived();
