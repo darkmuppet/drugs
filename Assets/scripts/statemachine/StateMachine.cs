@@ -27,6 +27,10 @@ public class StateMachine : MonoBehaviour {
     }
   }
 
+  public void Awake() {
+    DontDestroyOnLoad(gameObject);
+  }
+
   public void Start() {
     CurrentState.Enter();
   }
