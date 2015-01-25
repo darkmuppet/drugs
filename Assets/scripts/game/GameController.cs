@@ -48,7 +48,11 @@ public class GameController : MonoBehaviour {
   }
 
   public void OnGUI() {
+#if UNITY_EDITOR
     GUILayout.Label("Current state: " + StateMachine.CurrentStateName);
+#endif
+
+    Inventory.OnGUI();
   }
 
   public void LoadStartingRoom() {
