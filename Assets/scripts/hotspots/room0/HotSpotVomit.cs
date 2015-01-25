@@ -14,7 +14,6 @@ public class HotSpotVomit : HotSpotAddToInventory
         SpriteRenderer vomitSpriteRenderer= vomitGameObject.GetComponent<SpriteRenderer>();
         vomitSpriteRenderer.sprite = vomitNoKey;
         yield return null;
-        // TODO change vomit sprite?
 
     }
 }
