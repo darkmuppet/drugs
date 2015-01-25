@@ -10,7 +10,19 @@ public abstract class HotSpot : MonoBehaviour {
 
   public bool deactivateAfterAction = true;
 
+  public AudioClip clipPerformStart;
+
+  public AudioClip clipPerformEnd;
+
+  public AudioClip clipCustom;
+
   private bool InputLocked { get; set; }
+
+  public void Awake() {
+    if (audio == null) {
+      gameObject.AddComponent<AudioSource>();
+    }
+  }
 
   public void OnMouseOver() {
     if (InputLocked == false) {
@@ -87,7 +99,17 @@ public abstract class HotSpot : MonoBehaviour {
     Debug.Log("Performing action");
     InputLocked = true;
 
+    GameController.Instance.SetCursorStyle(GameController.CursorStyle.Default);
+
+    if (clipPerformStart != null) {
+      audio.PlayOneShot(clipPerformStart);
+    }
+
     yield return StartCoroutine(OnPerformAction());
+
+    if (clipPerformEnd != null) {
+      audio.PlayOneShot(clipPerformEnd);
+    }
 
     if (deactivateAfterAction) {
       GameObject.Destroy(gameObject);
@@ -97,4 +119,10 @@ public abstract class HotSpot : MonoBehaviour {
   }
 
   public abstract IEnumerator OnPerformAction();
+
+  protected void PlayCustomSound() {
+    if (clipCustom != null) {
+      audio.PlayOneShot(clipCustom);
+    }
+  }
 }
