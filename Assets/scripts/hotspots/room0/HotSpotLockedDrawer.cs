@@ -14,18 +14,14 @@ public class HotSpotLockedDrawer : HotSpot
     public override IEnumerator OnPerformAction()
     {
         neededInventoryItems.Clear();
-        if (!nextItem)
-        {
-            Debug.Log("first item");
-            GameController.Instance.Inventory.Add(item);
-            nextItem = true;
-        }
-        else
-        {
-            Debug.Log("second item");
-            GameController.Instance.Inventory.Add(item2);
-            deactivateAfterAction = true;
-        }
+
+        Debug.Log("first item");
+        GameController.Instance.Inventory.Add(item);
+        nextItem = true;
+        Debug.Log("second item");
+        GameController.Instance.Inventory.Add(item2);
+        deactivateAfterAction = true;
+
         yield return null;
     }
 }
