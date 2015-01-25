@@ -33,7 +33,7 @@ public class Inventory {
   public GameObject Remove(string id) {
     if (Items.ContainsKey(id)) {
       GameObject item = Items[id];
-      item.SetActive(true);
+      //item.SetActive(true);
       Items.Remove(item.name);
       InventoryTextures.Remove(item.name);
       return item;

@@ -46,6 +46,7 @@ public class HotSpotFridge : HotSpot
                 Debug.Log("second item");
                 GameController.Instance.Inventory.Add(sausageGameObject);
                 yoghurtGameObject.SetActive(false);
+                sausageGameObject.SetActive(false);
                 fridgeOpenGameObject.SetActive(false);
                 deactivateAfterAction = true;
             }

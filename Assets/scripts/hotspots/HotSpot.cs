@@ -54,6 +54,13 @@ public abstract class HotSpot : MonoBehaviour {
         if (meetsRequirements)
         {
             PerformAction();
+            neededInventoryItems.ForEach(item =>
+            {
+                if (GameController.Instance.Inventory.Owns(item) == true)
+                {
+                    GameController.Instance.Inventory.Remove(item);
+                }
+            });
         }
         else
         {

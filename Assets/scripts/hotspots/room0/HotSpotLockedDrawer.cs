@@ -13,6 +13,7 @@ public class HotSpotLockedDrawer : HotSpot
 
     public override IEnumerator OnPerformAction()
     {
+        neededInventoryItems.Clear();
         if (!nextItem)
         {
             Debug.Log("first item");
