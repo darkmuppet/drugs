@@ -17,8 +17,6 @@ public class GameController : MonoBehaviour {
 
   private StateMachine StateMachine { get; set; }
 
-  public GameObject prefabPlayer;
-
   public PlayerController Player { get; private set; }
 
   public Inventory Inventory { get; private set; }
@@ -66,7 +64,7 @@ public class GameController : MonoBehaviour {
 
     RoomRoot = roomRoot;
 
-    GameObject goPlayer = GameObject.Instantiate(prefabPlayer, RoomRoot.playerStart.position, RoomRoot.playerStart.rotation) as GameObject;
+    GameObject goPlayer = GameObject.Instantiate(RoomRoot.prefabPlayer, RoomRoot.playerStart.position, RoomRoot.playerStart.rotation) as GameObject;
     Player = goPlayer.GetComponent<PlayerController>();
   }
 

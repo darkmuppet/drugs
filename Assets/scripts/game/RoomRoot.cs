@@ -15,6 +15,10 @@ public class RoomRoot : MonoBehaviour {
 
   public bool clearInventory = true;
 
+  public bool spawnPlayer = true;
+
+  public GameObject prefabPlayer;
+
   private static bool firstLoad = true;
 
   public WaypointPathfinder pathFinder;

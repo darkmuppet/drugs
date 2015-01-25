@@ -12,7 +12,11 @@ public class PlayerController : MonoBehaviour {
 
   public Animator animator;
 
+  public Skeleton skeleton;
+
   private HotSpot CurrentHotSpot { get; set; }
+
+  private float LastPositionX { get; set; }
 
   public void MoveToHotSpot(HotSpot hotSpot, iTween.EaseType easeType = iTween.EaseType.linear) {
       // TODO fix this
@@ -44,12 +48,15 @@ public class PlayerController : MonoBehaviour {
       "oncomplete", "OnPathComplete"
       ));
 
-    // TODO: trigger walk animation
+    // trigger walk animation
     animator.SetTrigger("walk");
+
+    // flip orientation
+    skeleton.flip = (hotSpot.playerTarget.position.x > transform.position.x);
   }
 
   private void OnPathComplete() {
-    // TODO: trigger idle animation
+    // trigger idle animation
     animator.SetTrigger("idle");
 
     if (CurrentHotSpot != null) {
@@ -62,10 +69,10 @@ public class PlayerController : MonoBehaviour {
   //}
 
   public void LateUpdate() {
-    Vector3 scale = transform.localScale;
-    scale.x = 1.0f - transform.position.z * depthScaleFactor;
-    scale.y = 1.0f - transform.position.z * depthScaleFactor;
-    transform.localScale = scale;
+    //Vector3 scale = transform.localScale;
+    //scale.x = 1.0f - transform.position.z * depthScaleFactor;
+    //scale.y = 1.0f - transform.position.z * depthScaleFactor;
+    //transform.localScale = scale;
   }
 
   public void TriggerAnimation(string name) {

@@ -24,7 +24,9 @@ public class GameStatePlaying : AbstractState {
       GameController.Instance.Inventory.Clear();
     }
 
-    GameController.Instance.InitializePlayer(RoomRoot);
+    if (RoomRoot.spawnPlayer) {
+      GameController.Instance.InitializePlayer(RoomRoot);
+    }
   }
 
   protected override void OnLeave() {
