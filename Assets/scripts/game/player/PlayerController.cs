@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour {
 
   private float LastPositionX { get; set; }
 
+  public bool LooksRight { get; set; }
+
   public void MoveToHotSpot(HotSpot hotSpot, iTween.EaseType easeType = iTween.EaseType.linear) {
       // TODO fix this
     //if (CurrentHotSpot == hotSpot) {
@@ -52,7 +54,15 @@ public class PlayerController : MonoBehaviour {
     animator.SetTrigger("walk");
 
     // flip orientation
-    skeleton.flip = (hotSpot.playerTarget.position.x > transform.position.x);
+    bool targetIsLeft = (hotSpot.playerTarget.position.x < transform.position.x);
+    if (targetIsLeft == true && LooksRight == true) {
+      skeleton.FlipHack();
+      LooksRight = false;
+    } else if(targetIsLeft == false && LooksRight == false) {
+      skeleton.FlipHack();
+      LooksRight = true;
+    }
+    
   }
 
   private void OnPathComplete() {

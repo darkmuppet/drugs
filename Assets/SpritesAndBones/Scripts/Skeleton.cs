@@ -345,4 +345,15 @@ public class Skeleton : MonoBehaviour {
         }
     }
 #endif
+
+    public bool FlipHackFlip { get; set; }
+
+    public void FlipHack() {
+      if (FlipHackFlip) {
+        transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, 0.0f, transform.localEulerAngles.z);
+      } else {
+        transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, 180.0f, transform.localEulerAngles.z);
+      }
+      FlipHackFlip = !FlipHackFlip;
+    }
 }
