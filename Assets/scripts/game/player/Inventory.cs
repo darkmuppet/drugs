@@ -54,7 +54,7 @@ public class Inventory {
     float itemWidth = (float)Screen.width * 0.1f;
     float itemHeight = (float)Screen.height * 0.1f;
 
-    Rect rect = new Rect(0, 0, itemWidth, itemHeight);
+    Rect rect = new Rect(0, Screen.height - itemHeight, itemWidth, itemHeight);
 
     int itemNr = 0;
     foreach (Texture texture in InventoryTextures.Values) {
