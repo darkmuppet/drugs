@@ -5,6 +5,7 @@ public class HotSpotCage : HotSpot
 {
     public GameObject birdShockedGameObject;
     public GameObject birdGameObject;
+
     public Sprite birdSprite;
 
     public GameObject catFrontGameObject;
@@ -15,6 +16,12 @@ public class HotSpotCage : HotSpot
     public override IEnumerator OnPerformAction()
     {
         // TODO play bird/cage animation, move cat
+
+        GameController.Instance.Player.TriggerAnimation("shakecage");
+
+        yield return new WaitForSeconds(1);
+
+        GameController.Instance.Player.TriggerAnimation("idle");
 
         birdShockedGameObject.SetActive(true);
 
