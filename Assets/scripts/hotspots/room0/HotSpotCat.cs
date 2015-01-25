@@ -15,8 +15,8 @@ public class HotSpotCat : HotSpot
         
         // TODO cat vomits animation
 
-        Vector3 newCatPosFront = new Vector3(-6.02f, -5.4f, catSideGameObject.transform.position.z);
-        Vector3 newCatPos = new Vector3(-6.02f, -5.4f, catSideGameObject.transform.position.z);
+        Vector3 newCatPosFront = new Vector3(-5.65f, -4.73f, catSideGameObject.transform.position.z);
+        Vector3 newCatPos = new Vector3(-5.65f, -4.73f, catSideGameObject.transform.position.z);
 
 
 
@@ -41,7 +41,14 @@ public class HotSpotCat : HotSpot
         vomitHotSpot.SetActive(true);
         vomitGameObject.SetActive(true);
 
-        catFrontAnimator.SetTrigger("catidle");
+        catFrontGameObject.SetActive(false);
+        catSideGameObject.SetActive(true);
+        newCatPos = new Vector3(-7.23f, catSideGameObject.transform.position.y, catSideGameObject.transform.position.z);
+
+        catAnimator.SetTrigger("catwalk");
+        iTween.MoveTo(catSideGameObject, newCatPos, 2f);
+        yield return new WaitForSeconds(2);
+        catAnimator.SetTrigger("catidle");
 
         yield return null;
     }
