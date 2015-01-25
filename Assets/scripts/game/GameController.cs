@@ -6,6 +6,11 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour {
 
+  public enum CursorStyle {
+    Default,
+    HotSpot,
+  }
+
   public static string startingRoom = "room_0";
 
   private static GameController instance;
@@ -14,6 +19,9 @@ public class GameController : MonoBehaviour {
       return instance;
     }
   }
+
+  public Texture2D textureCursorDefault;
+  public Texture2D textureCursorHotSpot;
 
   private StateMachine StateMachine { get; set; }
 
@@ -35,6 +43,8 @@ public class GameController : MonoBehaviour {
     StateMachine = StateMachine.Create("state_machine", states, "GameStateMenu");
 
     Inventory = new Inventory();
+
+    SetCursorStyle(CursorStyle.Default);
   }
 
   public void SwitchToRoom(string sceneName) {
@@ -68,6 +78,15 @@ public class GameController : MonoBehaviour {
     Player = goPlayer.GetComponent<PlayerController>();
   }
 
-  
+  public void SetCursorStyle(CursorStyle cursorStyle) {
+    switch (cursorStyle) {
+      case CursorStyle.HotSpot:
+        Cursor.SetCursor(textureCursorHotSpot, Vector2.zero, CursorMode.Auto);
+        break;
+      default:
+        Cursor.SetCursor(textureCursorDefault, Vector2.zero, CursorMode.Auto);
+        break;
+    }
+  }
 }
 

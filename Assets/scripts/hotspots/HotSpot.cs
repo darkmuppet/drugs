@@ -14,8 +14,18 @@ public abstract class HotSpot : MonoBehaviour {
 
   public void OnMouseOver() {
     if (InputLocked == false) {
-      HighlightHotSpot();
+      
     }
+  }
+
+  public void OnMouseEnter() {
+    if (InputLocked == false) {
+      GameController.Instance.SetCursorStyle(GameController.CursorStyle.HotSpot);
+    }
+  }
+
+  public void OnMouseExit() {
+    GameController.Instance.SetCursorStyle(GameController.CursorStyle.Default);
   }
 
   public void OnMouseUpAsButton() {
