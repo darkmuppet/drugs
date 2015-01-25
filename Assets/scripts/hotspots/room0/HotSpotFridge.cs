@@ -5,27 +5,50 @@ public class HotSpotFridge : HotSpot
 {
 
 
-    public GameObject item;
-    public GameObject item2;
+    public GameObject sausageGameObject;
+    public GameObject spoonGameObject;
+
+    public GameObject fridgeOpenGameObject;
+    public GameObject yoghurtGameObject;
+
+    public Sprite yoghurtNoSpoon;
 
     private bool nextItem = false;
+    private bool fridgeClosed = true;
 
 
 
     public override IEnumerator OnPerformAction()
     {
-        Debug.Log("nextItem: " + nextItem);
-        if (!nextItem)
+        if (fridgeClosed)
         {
-            Debug.Log("first item");
-            GameController.Instance.Inventory.Add(item);
-            nextItem = true;
+            // open fridge
+            fridgeOpenGameObject.SetActive(true);
+            yoghurtGameObject.SetActive(true);
+            sausageGameObject.SetActive(true);
+
+            fridgeClosed = false;
         }
         else
         {
-            Debug.Log("second item");
-            GameController.Instance.Inventory.Add(item2);
-            deactivateAfterAction = true;
+            Debug.Log("nextItem: " + nextItem);
+            if (!nextItem)
+            {
+                Debug.Log("first item");
+                GameController.Instance.Inventory.Add(spoonGameObject);
+                SpriteRenderer yoghurtSpriteRenderer = yoghurtGameObject.GetComponent<SpriteRenderer>();
+                yoghurtSpriteRenderer.sprite = yoghurtNoSpoon;
+               
+                nextItem = true;
+            }
+            else
+            {
+                Debug.Log("second item");
+                GameController.Instance.Inventory.Add(sausageGameObject);
+                yoghurtGameObject.SetActive(false);
+                fridgeOpenGameObject.SetActive(false);
+                deactivateAfterAction = true;
+            }
         }
         yield return null;
     }
