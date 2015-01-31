@@ -56,7 +56,7 @@ public class Inventory {
 
     Rect rect = new Rect(0, Screen.height - itemHeight, itemWidth, itemHeight);
 
-    int itemNr = 0;
+    int itemNr = 1;
     foreach (Texture texture in InventoryTextures.Values) {
       rect.x = Screen.width - itemWidth * itemNr;
       GUI.Box(rect, "");

@@ -36,13 +36,13 @@ public class HotSpotCage : HotSpot
 
 
 
-        // TODO triggr walk
+        // TODO trigger walk
         Animator catAnimator = catSideGameObject.GetComponentInChildren<Animator>();
-       catAnimator.SetTrigger("catwalk");
+       catAnimator.SetTrigger("walk");
         iTween.MoveTo(catSideGameObject, newCatPos, 2f);
         yield return new WaitForSeconds(2);
         // TODO trigger idle
-        catAnimator.SetTrigger("catidle");
+        catAnimator.SetTrigger("meow");
 
 
         birdGameObject.GetComponent<SpriteRenderer>().sprite = birdSprite;

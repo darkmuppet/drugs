@@ -6,10 +6,13 @@ public class HotSpotFridge : HotSpot
 
 
     public GameObject sausageGameObject;
+    public GameObject sausageHotSpotGameObject;
+    public GameObject yoghurtGameObject;
+    public GameObject yoghurtHotSpotGameObject;
+
     public GameObject spoonGameObject;
 
     public GameObject fridgeOpenGameObject;
-    public GameObject yoghurtGameObject;
 
     public Sprite yoghurtNoSpoon;
 
@@ -20,37 +23,49 @@ public class HotSpotFridge : HotSpot
 
     public override IEnumerator OnPerformAction()
     {
+        Debug.Log("sausagegameobject is " + sausageGameObject.activeSelf + " and spoonGameObject is " + spoonGameObject.activeSelf);
         if (fridgeClosed)
         {
             // open fridge
             fridgeOpenGameObject.SetActive(true);
             yoghurtGameObject.SetActive(true);
+            yoghurtHotSpotGameObject.SetActive(true);
             sausageGameObject.SetActive(true);
+            sausageHotSpotGameObject.SetActive(true);
 
             fridgeClosed = false;
         }
         else
         {
-            Debug.Log("nextItem: " + nextItem);
-            if (!nextItem)
+            if (!sausageGameObject.activeSelf && !spoonGameObject.activeSelf)
             {
-                Debug.Log("first item");
-                GameController.Instance.Inventory.Add(spoonGameObject);
-                SpriteRenderer yoghurtSpriteRenderer = yoghurtGameObject.GetComponent<SpriteRenderer>();
-                yoghurtSpriteRenderer.sprite = yoghurtNoSpoon;
-               
-                nextItem = true;
-            }
-            else
-            {
-                Debug.Log("second item");
-                GameController.Instance.Inventory.Add(sausageGameObject);
                 yoghurtGameObject.SetActive(false);
-                sausageGameObject.SetActive(false);
                 fridgeOpenGameObject.SetActive(false);
                 deactivateAfterAction = true;
             }
         }
+        //else
+        //{
+        //    Debug.Log("nextItem: " + nextItem);
+        //    if (!nextItem)
+        //    {
+        //        Debug.Log("first item");
+        //        GameController.Instance.Inventory.Add(spoonGameObject);
+        //        SpriteRenderer yoghurtSpriteRenderer = yoghurtGameObject.GetComponent<SpriteRenderer>();
+        //        yoghurtSpriteRenderer.sprite = yoghurtNoSpoon;
+
+        //        nextItem = true;
+        //    }
+        //    else
+        //    {
+        //        Debug.Log("second item");
+        //        GameController.Instance.Inventory.Add(sausageGameObject);
+        //        yoghurtGameObject.SetActive(false);
+        //        sausageGameObject.SetActive(false);
+        //        fridgeOpenGameObject.SetActive(false);
+        //        deactivateAfterAction = true;
+        //    }
+        //}
         yield return null;
     }
 }
