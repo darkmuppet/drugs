@@ -22,7 +22,7 @@ public class HotSpotCat : HotSpot
 
         // TODO triggr walk
         Animator catAnimator = catSideGameObject.GetComponentInChildren<Animator>();
-        catAnimator.SetTrigger("catwalk");
+        catAnimator.SetTrigger("walk");
         iTween.MoveTo(catSideGameObject, newCatPos, 2f);
         yield return new WaitForSeconds(2);
         // TODO trigger idle
@@ -34,9 +34,10 @@ public class HotSpotCat : HotSpot
 
 
         catFrontGameObject.SetActive(true);
-        catFrontAnimator.SetTrigger("catvomit");
-        yield return new WaitForSeconds(2);
-
+        catFrontAnimator.SetTrigger("vomit");
+        yield return new WaitForSeconds(0.5f);
+        audio.PlayOneShot(clipCustom);
+        yield return new WaitForSeconds(1);
 
         vomitHotSpot.SetActive(true);
         vomitGameObject.SetActive(true);
@@ -45,10 +46,10 @@ public class HotSpotCat : HotSpot
         catSideGameObject.SetActive(true);
         newCatPos = new Vector3(-7.23f, catSideGameObject.transform.position.y, catSideGameObject.transform.position.z);
 
-        catAnimator.SetTrigger("catwalk");
+        catAnimator.SetTrigger("walk");
         iTween.MoveTo(catSideGameObject, newCatPos, 2f);
         yield return new WaitForSeconds(2);
-        catAnimator.SetTrigger("catidle");
+        catAnimator.SetTrigger("idle");
 
         yield return null;
     }
