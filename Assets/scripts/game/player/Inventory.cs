@@ -4,14 +4,16 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
+public class Inventory : MonoBehaviour {
 
-public class Inventory {
+  public AudioClip clipPickup;
 
   private Dictionary<string, GameObject> Items { get; set; }
 
   private Dictionary<string, Texture> InventoryTextures { get; set; }
 
-  public Inventory() {
+  public void Awake() {
     Items = new Dictionary<string, GameObject>();
     InventoryTextures = new Dictionary<string, Texture>();
   }
@@ -28,6 +30,8 @@ public class Inventory {
     if (spriteRenderer != null && spriteRenderer.sprite != null) {
       InventoryTextures[item.name] = spriteRenderer.sprite.texture;
     }
+
+    audio.PlayOneShot(clipPickup);
   }
 
   public GameObject Remove(string id) {

@@ -22,12 +22,17 @@ public class GameController : MonoBehaviour {
 
   public Texture2D textureCursorDefault;
   public Texture2D textureCursorHotSpot;
+  public Inventory inventory;
 
   private StateMachine StateMachine { get; set; }
 
   public PlayerController Player { get; private set; }
 
-  public Inventory Inventory { get; private set; }
+  public Inventory Inventory {
+    get {
+      return inventory;
+    }
+  }
 
   public RoomRoot RoomRoot { get; private set; }
 
@@ -41,8 +46,6 @@ public class GameController : MonoBehaviour {
     states.Add(new GameStatePlaying("GameStatePlaying"));
 
     StateMachine = StateMachine.Create("state_machine", states, "GameStateMenu");
-
-    Inventory = new Inventory();
 
     SetCursorStyle(CursorStyle.Default);
   }
@@ -59,8 +62,6 @@ public class GameController : MonoBehaviour {
 #if UNITY_EDITOR
     GUILayout.Label("Current state: " + StateMachine.CurrentStateName);
 #endif
-
-    Inventory.OnGUI();
   }
 
   public void LoadStartingRoom() {

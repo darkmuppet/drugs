@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour {
 
   public float speed = 10;
 
+  public float animatorSpeedFactor = 0.1f;
+
   public float depthScaleFactor = -1.2f;
 
   public Animator animator;
@@ -16,9 +18,11 @@ public class PlayerController : MonoBehaviour {
 
   private HotSpot CurrentHotSpot { get; set; }
 
-  private float LastPositionX { get; set; }
+  private Vector3 LastPosition { get; set; }
 
-  public bool LooksRight { get; set; }
+  private bool LooksRight { get; set; }
+
+  private bool IsWalking { get; set; }
 
   public void MoveToHotSpot(HotSpot hotSpot, iTween.EaseType easeType = iTween.EaseType.linear) {
       // TODO fix this
@@ -62,7 +66,8 @@ public class PlayerController : MonoBehaviour {
       skeleton.FlipHack();
       LooksRight = true;
     }
-    
+
+    IsWalking = true;
   }
 
   private void OnPathComplete() {
@@ -72,6 +77,9 @@ public class PlayerController : MonoBehaviour {
     if (CurrentHotSpot != null) {
       CurrentHotSpot.OnPlayerArrived();
     }
+
+    IsWalking = false;
+    animator.speed = 1;
   }
 
   //public void Update() {
@@ -83,6 +91,14 @@ public class PlayerController : MonoBehaviour {
     //scale.x = 1.0f - transform.position.z * depthScaleFactor;
     //scale.y = 1.0f - transform.position.z * depthScaleFactor;
     //transform.localScale = scale;
+
+    if (IsWalking) {
+      Vector3 currentPosition = transform.position;
+      float diff = Vector3.Distance(currentPosition, LastPosition);
+      animator.speed = diff * animatorSpeedFactor;
+
+      LastPosition = currentPosition;
+    }
   }
 
   public void TriggerAnimation(string name) {
