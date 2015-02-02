@@ -87,6 +87,7 @@ public abstract class HotSpot : MonoBehaviour {
         else
         {
             // TODO sigh!
+            GameController.Instance.Player.TriggerAnimation("giveup");
         }
     }
   }

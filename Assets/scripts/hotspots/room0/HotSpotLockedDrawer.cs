@@ -11,7 +11,7 @@ public class HotSpotLockedDrawer : HotSpot
     public override IEnumerator OnPerformAction()
     {
         neededInventoryItems.Clear();
-        audio.PlayOneShot(clipCustom);
+        PlayCustomSound();
         yield return new WaitForSeconds(1);
         Debug.Log("first item");
         GameController.Instance.Inventory.Add(item);
